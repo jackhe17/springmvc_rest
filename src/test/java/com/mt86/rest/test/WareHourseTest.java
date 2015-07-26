@@ -6,6 +6,7 @@ import java.net.URI;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -21,16 +22,18 @@ import com.mt86.rest.model.Warehouse;
 public class WareHourseTest {
 	private static final int WAREHOUSE_ID = 1;
 	private static final int PRODUCT_ID = 4;
-	private RestTemplate restTemplate = new RestTemplate();
+	@Autowired
+	RestTemplate restTemplate ;
 	
 	@Test
 	public void getWarehouse(){
 		String uri="http://localhost:8080/springmvc_rest/spring/w/{wid}";
-		Warehouse warehouse = restTemplate.getForObject(uri, Warehouse.class,WAREHOUSE_ID);
+		Warehouse warehouse  = restTemplate.getForObject(uri, Warehouse.class,WAREHOUSE_ID);
+		
 		assertNotNull(warehouse);
 		assertEquals("W_004", warehouse.getName());
 	}
-	
+	/*
 	@Test
 	public void addProduct() {
 		String uri = "http://localhost:8080/springmvc_rest/spring/w/{wid}/p";
@@ -53,5 +56,5 @@ public class WareHourseTest {
 		} catch (HttpClientErrorException e) {
 			assertEquals(HttpStatus.NOT_FOUND, e.getStatusCode());
 		}
-	}
+	}*/
 }
